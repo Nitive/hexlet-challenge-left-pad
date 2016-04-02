@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Nitive/hexlet-challenge-left-pad.svg?branch=master)](https://travis-ci.org/Nitive/hexlet-challenge-left-pad)
+
 Таблица `employees` содержит все работников включая их менеджеров.
 Каждый работник имеет `id` и колонку для `id` менеджера `manager_id`.
 
