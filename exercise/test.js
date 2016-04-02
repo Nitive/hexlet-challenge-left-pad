@@ -1,24 +1,23 @@
 /* global require describe it */
 
-const fs = require('fs');
 const assert = require('assert');
-const pgp = require('pg-promise')(/*options*/);
-const cn = {
-  user: 'nobody',
-  host: '/var/run/postgresql',
-};
+const leftPad = require('./solution');
 
-describe('rows', () => {
-  it('should be updated', (done) => {
-    const db = pgp(cn);
-    const solution = fs.readFileSync('./solution.sql', 'utf8');
+describe('left-pad', () => {
+  it('should add zeros', () => {
+    assert.equal(leftPad('123', 4), ' 123');
+  });
 
-    const actualQuery = db.query(solution);
-    const expectedQuery = db.query('select solution() AS name;');
+  it('shoud not add zeros if string less then length', () => {
+    assert.equal(leftPad('12345', 4), '12345');
+  });
 
-    Promise.all([expectedQuery, actualQuery]).then(([expected, actual]) => {
-      assert.equal(JSON.stringify(expected), JSON.stringify(actual));
-    }).then(done, done);
+  it('shoud not add zeros if string length equal with given length', () => {
+    assert.equal(leftPad('12345', 5), '12345');
+  });
+
+  it('shoud add zeros to empty string', () => {
+    assert.equal(leftPad('', 5), '     ');
   });
 });
 
